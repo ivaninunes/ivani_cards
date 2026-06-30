@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- fundo -->
+  <rect width="512" height="512" rx="100" fill="#14181F"/>
+  <!-- brilho sutil no topo -->
+  <radialGradient id="g" cx="50%" cy="0%" r="80%">
+    <stop offset="0%" stop-color="#FF7A45" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#14181F" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="512" height="512" rx="100" fill="url(#g)"/>
+  <!-- borda laranja fina -->
+  <rect x="6" y="6" width="500" height="500" rx="96" fill="none" stroke="#FF7A45" stroke-width="8" stroke-opacity="0.4"/>
+  <!-- cartão decorativo atrás -->
+  <rect x="120" y="130" width="200" height="260" rx="18" fill="#1F2630" stroke="#2D3744" stroke-width="3" transform="rotate(-8 220 260)"/>
+  <!-- cartão principal -->
+  <rect x="150" y="110" width="210" height="270" rx="18" fill="#1B212B" stroke="#FF7A45" stroke-width="4"/>
+  <!-- barra laranja à esquerda -->
+  <rect x="150" y="110" width="8" height="270" rx="4" fill="#FF7A45"/>
+  <!-- letras IC -->
+  <text x="255" y="278" font-family="'JetBrains Mono',monospace" font-weight="800" font-size="110" fill="#FF7A45" text-anchor="middle" letter-spacing="-4">IC</text>
+  <!-- tag decorativa -->
+  <rect x="178" y="332" width="106" height="24" rx="6" fill="#FF7A4522"/>
+  <text x="231" y="349" font-family="monospace" font-weight="700" font-size="13" fill="#FF7A45" text-anchor="middle">vocab.cards</text>
+</svg>
