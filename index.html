@@ -1050,18 +1050,25 @@ async function runImgSearch(){
   if(!q){grid.innerHTML='<div class="img-search-msg">Digite algo para buscar.</div>';return;}
   grid.innerHTML='<div class="img-search-msg">Buscando…</div>';
   try{
-    const res=await fetch(`https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&page_size=24`);
+    const url=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent('filetype:bitmap '+q)}&gsrlimit=24&prop=imageinfo&iiprop=url&iiurlwidth=300&format=json&origin=*`;
+    const res=await fetch(url);
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
-    const results=(data.results||[]).filter(r=>r.thumbnail||r.url);
-    if(!results.length){grid.innerHTML='<div class="img-search-msg">Nenhuma imagem encontrada. Tente outro termo.</div>';return;}
-    grid.innerHTML=results.map(r=>`<img src="${r.thumbnail||r.url}" data-full="${r.url}" loading="lazy" onerror="this.style.display='none'">`).join('');
+    const pages=data.query?.pages?Object.values(data.query.pages):[];
+    const results=pages.filter(p=>p.imageinfo&&p.imageinfo[0]);
+    if(!results.length){grid.innerHTML='<div class="img-search-msg">Nenhuma imagem encontrada. Tente outro termo (em inglês funciona melhor).</div>';return;}
+    grid.innerHTML=results.map(p=>{
+      const info=p.imageinfo[0];
+      const thumb=info.thumburl||info.url;
+      const full=info.url;
+      return `<img src="${thumb}" data-full="${full}" loading="lazy" onerror="this.style.display='none'">`;
+    }).join('');
     grid.querySelectorAll('img').forEach(img=>{
       img.addEventListener('click',()=>selectSearchedImage(img.dataset.full));
     });
   }catch(e){
     console.error('Erro busca imagem:',e);
-    grid.innerHTML=`<div class="img-search-msg">Erro ao buscar imagens: ${escapeHtml(e.message)}.<br>Se estiver abrindo o arquivo direto do computador (file://), suba para o GitHub Pages — a busca funciona melhor hospedada online.</div>`;
+    grid.innerHTML=`<div class="img-search-msg">Erro ao buscar imagens: ${escapeHtml(e.message)}.</div>`;
   }
 }
 
