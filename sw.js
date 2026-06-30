@@ -1,4 +1,4 @@
-const CACHE = 'ivani-cards-v1';
+const CACHE = 'ivani-cards-v2';
 const ASSETS = [
   '/ivani_cards/',
   '/ivani_cards/index.html',
