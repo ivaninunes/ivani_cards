@@ -564,9 +564,10 @@ footer button:hover{color:var(--text-secondary);}
 
     <div id="srcPdf">
       <div class="upload-zone" id="uploadZone">
-        <input type="file" id="pdfInput" accept=".pdf">
+        <input type="file" id="pdfInput" accept=".pdf,.txt,.md,.cfg">
         <div class="uz-icon">📄</div>
-        <div>Clique ou arraste um PDF aqui</div>
+        <div>Clique ou arraste um arquivo aqui</div>
+        <div style="font-size:11px;opacity:.5;margin-top:4px;">PDF, TXT, MD, CFG</div>
         <div style="margin-top:6px;font-size:11px;opacity:.6">Texto extraído no seu navegador — sem upload</div>
       </div>
       <div class="progress-bar-wrap" id="extractProg">
@@ -761,8 +762,32 @@ const uploadZone=document.getElementById('uploadZone');
 uploadZone.addEventListener('click',()=>document.getElementById('pdfInput').click());
 uploadZone.addEventListener('dragover',e=>{e.preventDefault();uploadZone.classList.add('drag');});
 uploadZone.addEventListener('dragleave',()=>uploadZone.classList.remove('drag'));
-uploadZone.addEventListener('drop',e=>{e.preventDefault();uploadZone.classList.remove('drag');const f=e.dataTransfer.files[0];if(f&&f.type==='application/pdf')processPdf(f);else showPanelMsg('Só aceito arquivos PDF.','error');});
-document.getElementById('pdfInput').addEventListener('change',e=>{if(e.target.files[0])processPdf(e.target.files[0]);});
+uploadZone.addEventListener('drop',e=>{e.preventDefault();uploadZone.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)processFile(f);else showPanelMsg('Arquivo não suportado.','error');});
+document.getElementById('pdfInput').addEventListener('change',e=>{if(e.target.files[0])processFile(e.target.files[0]);});
+
+function processFile(file){
+  const name=file.name.toLowerCase();
+  if(name.endsWith('.pdf'))processPdf(file);
+  else if(name.endsWith('.txt')||name.endsWith('.md')||name.endsWith('.cfg'))processTextFile(file);
+  else showPanelMsg('Formato não suportado. Use PDF, TXT, MD ou CFG.','error');
+}
+
+async function processTextFile(file){
+  showPanelMsg('','');
+  document.getElementById('extractProg').classList.add('show');
+  setProgress('extract',20,'Lendo arquivo…');
+  try{
+    const text=await file.text();
+    setProgress('extract',75,'Extraindo palavras…');
+    const {words,sentences}=extractWordsAndSentences(text);
+    setProgress('extract',100,`${words.length} palavras únicas encontradas`);
+    extractedWords=words;extractedSentences=sentences;
+    const preview=document.getElementById('wordPreview');
+    preview.textContent=words.slice(0,150).join(', ')+(words.length>150?` … e mais ${words.length-150}`:'');
+    preview.classList.add('show');
+    updateCreateBtn();
+  }catch(e){showPanelMsg('Erro ao ler o arquivo: '+e.message,'error');document.getElementById('extractProg').classList.remove('show');}
+}
 
 async function processPdf(file){
   if(typeof pdfjsLib==='undefined'){showPanelMsg('PDF.js não carregou.','error');return;}
