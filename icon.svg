@@ -1,23 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- fundo -->
-  <rect width="512" height="512" rx="100" fill="#14181F"/>
-  <!-- brilho sutil no topo -->
-  <radialGradient id="g" cx="50%" cy="0%" r="80%">
-    <stop offset="0%" stop-color="#FF7A45" stop-opacity="0.15"/>
-    <stop offset="100%" stop-color="#14181F" stop-opacity="0"/>
-  </radialGradient>
-  <rect width="512" height="512" rx="100" fill="url(#g)"/>
-  <!-- borda laranja fina -->
-  <rect x="6" y="6" width="500" height="500" rx="96" fill="none" stroke="#FF7A45" stroke-width="8" stroke-opacity="0.4"/>
-  <!-- cartão decorativo atrás -->
-  <rect x="120" y="130" width="200" height="260" rx="18" fill="#1F2630" stroke="#2D3744" stroke-width="3" transform="rotate(-8 220 260)"/>
-  <!-- cartão principal -->
-  <rect x="150" y="110" width="210" height="270" rx="18" fill="#1B212B" stroke="#FF7A45" stroke-width="4"/>
-  <!-- barra laranja à esquerda -->
-  <rect x="150" y="110" width="8" height="270" rx="4" fill="#FF7A45"/>
-  <!-- letras IC -->
-  <text x="255" y="278" font-family="'JetBrains Mono',monospace" font-weight="800" font-size="110" fill="#FF7A45" text-anchor="middle" letter-spacing="-4">IC</text>
-  <!-- tag decorativa -->
-  <rect x="178" y="332" width="106" height="24" rx="6" fill="#FF7A4522"/>
-  <text x="231" y="349" font-family="monospace" font-weight="700" font-size="13" fill="#FF7A45" text-anchor="middle">vocab.cards</text>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1525"/>
+      <stop offset="100%" stop-color="#080D18"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FF3D00"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#FF6B35" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FF6B35" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="110" fill="url(#glow)"/>
+  <rect x="5" y="5" width="502" height="502" rx="107" fill="none" stroke="#FF6B35" stroke-width="6" stroke-opacity="0.35"/>
+  <!-- back card -->
+  <rect x="108" y="148" width="220" height="268" rx="20" fill="#172338" stroke="#1E2E48" stroke-width="2" transform="rotate(-7 218 282)"/>
+  <!-- main card -->
+  <rect x="142" y="118" width="228" height="278" rx="20" fill="#111D30" stroke="#1E2E48" stroke-width="2"/>
+  <rect x="142" y="118" width="228" height="6" rx="3" fill="url(#acc)"/>
+  <!-- Mt monogram -->
+  <text x="256" y="292" font-family="'JetBrains Mono',monospace" font-weight="800" font-size="116" fill="url(#acc)" text-anchor="middle" letter-spacing="-6">Mt</text>
+  <!-- bottom tag -->
+  <rect x="162" y="344" width="188" height="26" rx="8" fill="#FF6B3518"/>
+  <text x="256" y="362" font-family="monospace" font-weight="700" font-size="13" fill="#FF6B35" text-anchor="middle" letter-spacing="1">MEMOTECH</text>
 </svg>

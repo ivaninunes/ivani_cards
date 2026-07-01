@@ -1,12 +1,12 @@
 {
-  "name": "Ivani Cards",
-  "short_name": "Ivani Cards",
-  "description": "Cartões de vocabulário em inglês com tradução automática",
+  "name": "MemoTech",
+  "short_name": "MemoTech",
+  "description": "Memorize vocabulário de manuais técnicos em inglês com IA",
   "start_url": "/ivani_cards/",
   "scope": "/ivani_cards/",
   "display": "standalone",
-  "background_color": "#14181F",
-  "theme_color": "#FF7A45",
+  "background_color": "#080D18",
+  "theme_color": "#FF6B35",
   "orientation": "portrait",
   "icons": [
     {
